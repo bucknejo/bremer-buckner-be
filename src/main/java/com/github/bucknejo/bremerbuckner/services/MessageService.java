@@ -24,6 +24,9 @@ public class MessageService {
     @Value("${bremerbuckner.mail.from}")
     private String from;
 
+    @Value("${bremerbuckner.mail.subject}")
+    private String subject;
+
     @Autowired
     public MessageService(JavaMailSender javaMailSender) {
         this.javaMailSender = javaMailSender;
@@ -45,9 +48,8 @@ public class MessageService {
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
             mimeMessageHelper.setTo(to);
             mimeMessageHelper.setFrom(from);
-            mimeMessageHelper.setSubject(message.getSubject());
-            String text = String.format("from: %s\nbody: %s", message.getFrom(), message.getBody());
-            mimeMessageHelper.setText(text, true);
+            mimeMessageHelper.setSubject(String.format("%s: %s", subject, message.getSubject()));
+            mimeMessageHelper.setText(setBody(message), true);
             javaMailSender.send(mimeMessage);
 
         } catch (Exception e) {
@@ -57,6 +59,32 @@ public class MessageService {
 
         return response;
 
+    }
+
+    private String setBody(Message message) {
+        StringBuilder stringBuilder;
+        stringBuilder = new StringBuilder();
+
+        stringBuilder.append("<table>");
+        stringBuilder.append("<tr>")
+                .append("<td>").append("Name:").append("</td>")
+                .append("<td>").append(String.format("%s %s", message.getFirstName(), message.getLastName())).append("</td>");
+        stringBuilder.append("<tr>")
+                .append("<td>").append("Email:").append("</td>")
+                .append("<td>").append(message.getEmail()).append("</td>");
+        stringBuilder.append("<tr>")
+                .append("<td>").append("Phone:").append("</td>")
+                .append("<td>").append(message.getPhone()).append("</td>");
+        stringBuilder.append("<tr>")
+                .append("<td>").append("Practice:").append("</td>")
+                .append("<td>").append(message.getPractice()).append("</td>");
+        stringBuilder.append("<tr>")
+                .append("<td>").append("Note:").append("</td>")
+                .append("<td>").append(message.getNote()).append("</td>");
+        stringBuilder.append("</tr>");
+        stringBuilder.append("</table>");
+
+        return stringBuilder.toString();
     }
 
 }
