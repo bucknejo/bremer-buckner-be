@@ -2,28 +2,48 @@ package com.github.bucknejo.bremerbuckner.domain;
 
 public class Message {
 
-    private String from;
+    private String firstName;
+    private String lastName;
+    private String email;
     private String subject;
-    private String body;
+    private String note;
     private String practice;
     private String phone;
 
     public Message() {}
 
-    public Message(String from, String subject, String body, String practice, String phone) {
-        this.from = from;
+    public Message(String firstName, String lastName, String from, String subject, String note, String practice, String phone) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = from;
         this.subject = subject;
-        this.body = body;
+        this.note = note;
         this.practice = practice;
         this.phone = phone;
     }
 
-    public String getFrom() {
-        return from;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFrom(String from) {
-        this.from = from;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getSubject() {
@@ -34,12 +54,12 @@ public class Message {
         this.subject = subject;
     }
 
-    public String getBody() {
-        return body;
+    public String getNote() {
+        return note;
     }
 
-    public void setBody(String body) {
-        this.body = body;
+    public void setNote(String note) {
+        this.note = note;
     }
 
     public String getPractice() {
@@ -61,9 +81,11 @@ public class Message {
     @Override
     public String toString() {
         return "Message{" +
-                "from='" + from + '\'' +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
                 ", subject='" + subject + '\'' +
-                ", body='" + body + '\'' +
+                ", note='" + note + '\'' +
                 ", practice='" + practice + '\'' +
                 ", phone='" + phone + '\'' +
                 '}';

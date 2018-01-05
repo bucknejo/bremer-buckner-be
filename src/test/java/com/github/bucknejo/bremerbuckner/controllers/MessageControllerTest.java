@@ -1,6 +1,7 @@
 package com.github.bucknejo.bremerbuckner.controllers;
 
 import com.github.bucknejo.bremerbuckner.domain.Message;
+import com.github.bucknejo.bremerbuckner.domain.MessageBuilder;
 import com.github.bucknejo.bremerbuckner.services.MessageService;
 import com.github.bucknejo.bremerbuckner.utility.TestUtil;
 import org.junit.Test;
@@ -53,12 +54,15 @@ public class MessageControllerTest {
 
     @Test
     public void serviceShouldSendEmailMock() throws Exception {
-        Message message = new Message();
-        message.setFrom("test from");
-        message.setBody("test body");
-        message.setPhone("test phone");
-        message.setPractice("test practice");
-        message.setSubject("test subject");
+        Message message = MessageBuilder.aMessage()
+                .withFirstName("Jerry")
+                .withLastName("Garcia")
+                .withEmail("jerry@dead.net")
+                .withSubject("Help me with royalties")
+                .withNote("Can you help me organize my royalties?")
+                .withPractice("Civil")
+                .withPhone("2015551212")
+                .build();
         when(messageService.sendMessage(any())).thenReturn(true);
         this.mockMvc
                 .perform(post("/service/message/send")
