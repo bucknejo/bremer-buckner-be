@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BremerBucknerBeApplication {
+public class BremerBucknerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BremerBucknerBeApplication.class, args);
+		SpringApplication.run(BremerBucknerApplication.class, args);
 	}
 }
